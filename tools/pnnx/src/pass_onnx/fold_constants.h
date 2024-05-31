@@ -18,11 +18,7 @@ namespace pnnx {
 
 namespace onnx2pnnx {
 
-void fold_constants(onnx::ModelProto& model,
-                    const std::vector<std::vector<int64_t> >& input_shapes,
-                    const std::vector<std::string>& input_types,
-                    const std::vector<std::vector<int64_t> >& input_shapes2,
-                    const std::vector<std::string>& input_types2);
+void fold_constants(onnx::ModelProto& model);
 
 } // namespace onnx2pnnx
 

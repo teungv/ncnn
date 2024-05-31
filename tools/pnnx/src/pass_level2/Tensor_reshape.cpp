@@ -44,11 +44,10 @@ public:
     const char* match_pattern_graph() const
     {
         return R"PNNXIR(7767517
-5 4
+4 3
 pnnx.Input              input_0     0 1 input
 pnnx.Input              input_1     0 1 shape
-aten::cat               op_0        1 1 shape cat dim=0
-Reshape                 op_1        2 1 input cat out allowzero=*
+Reshape                 op_0        2 1 input shape out allowzero=*
 pnnx.Output             output      1 0 out
 )PNNXIR";
     }
@@ -59,27 +58,9 @@ pnnx.Output             output      1 0 out
     }
 };
 
-REGISTER_GLOBAL_PNNX_GRAPH_REWRITER_PASS(Tensor_reshape_onnx, 19)
+REGISTER_GLOBAL_PNNX_GRAPH_REWRITER_PASS(Tensor_reshape_onnx, 20)
 
-class Tensor_reshape_onnx_1 : public Tensor_reshape_onnx
-{
-public:
-    const char* match_pattern_graph() const
-    {
-        return R"PNNXIR(7767517
-5 4
-pnnx.Input              input_0     0 1 input
-pnnx.Input              input_1     0 1 shape
-aten::cat               op_0        1 1 shape cat dim=0
-Reshape                 op_1        2 1 input cat out
-pnnx.Output             output      1 0 out
-)PNNXIR";
-    }
-};
-
-REGISTER_GLOBAL_PNNX_GRAPH_REWRITER_PASS(Tensor_reshape_onnx_1, 19)
-
-class Tensor_reshape_onnx_2 : public Tensor_reshape_onnx
+class Tensor_reshape_onnx_1 : public GraphRewriterPass
 {
 public:
     const char* match_pattern_graph() const
@@ -88,29 +69,17 @@ public:
 4 3
 pnnx.Input              input_0     0 1 input
 pnnx.Input              input_1     0 1 shape
-Reshape                 op_1        2 1 input shape out allowzero=*
+Reshape                 op_0        2 1 input shape out
 pnnx.Output             output      1 0 out
 )PNNXIR";
     }
-};
 
-REGISTER_GLOBAL_PNNX_GRAPH_REWRITER_PASS(Tensor_reshape_onnx_2, 20)
-
-class Tensor_reshape_onnx_3 : public Tensor_reshape_onnx
-{
-public:
-    const char* match_pattern_graph() const
+    const char* type_str() const
     {
-        return R"PNNXIR(7767517
-4 3
-pnnx.Input              input_0     0 1 input
-pnnx.Input              input_1     0 1 shape
-Reshape                 op_1        2 1 input shape out
-pnnx.Output             output      1 0 out
-)PNNXIR";
+        return "Tensor.reshape";
     }
 };
 
-REGISTER_GLOBAL_PNNX_GRAPH_REWRITER_PASS(Tensor_reshape_onnx_3, 20)
+REGISTER_GLOBAL_PNNX_GRAPH_REWRITER_PASS(Tensor_reshape_onnx_1, 20)
 
 } // namespace pnnx

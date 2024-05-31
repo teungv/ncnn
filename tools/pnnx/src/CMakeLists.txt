@@ -360,11 +360,9 @@ set(pnnx_pass_level5_SRCS
     pass_level5/fuse_multiheadattention.cpp
     pass_level5/fuse_scaled_dot_product_attention.cpp
     pass_level5/fuse_select_to_unbind.cpp
-    pass_level5/fuse_silu.cpp
     pass_level5/fuse_slice_copy.cpp
     pass_level5/fuse_slice_indices.cpp
     pass_level5/fuse_slice_to_tensor_split.cpp
-    pass_level5/fuse_slice_squeeze_to_select.cpp
     pass_level5/fuse_static_batchnorm.cpp
     pass_level5/fuse_static_conv.cpp
     pass_level5/fuse_static_convtranspose.cpp
